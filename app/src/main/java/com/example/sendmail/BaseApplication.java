@@ -1,8 +1,9 @@
 package com.example.sendmail;
 
 import android.app.Activity;
-import android.support.multidex.MultiDexApplication;
 import android.util.Log;
+
+import androidx.multidex.MultiDexApplication;
 
 import com.example.sendmail.uitl.CrashHandler;
 

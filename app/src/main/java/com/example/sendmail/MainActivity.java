@@ -1,33 +1,28 @@
 package com.example.sendmail;
 
+import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 
-import com.example.sendmail.uitl.CrashHandler;
-import com.example.sendmail.uitl.FileUtil;
 import com.example.sendmail.uitl.mail.Mail;
-import com.example.sendmail.uitl.mail.MailSender;
 
-import java.io.File;
-import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final Mail mail = createMail(new String[]{"收件人"}, null, null);
-        final MailSender sender = new MailSender();
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                List<File> fileList = FileUtil.getFileList(CrashHandler.getGlobalpath());
-
-                sender.sendFileMail(mail, fileList);
-            }
-        }).start();
+//        final Mail mail = createMail(new String[]{"收件人"}, null, null);
+//        final MailSender sender = new MailSender();
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                List<File> fileList = FileUtil.getFileList(CrashHandler.getGlobalpath());
+//
+//                sender.sendFileMail(mail, fileList);
+//            }
+//        }).start();
 
 
     }
