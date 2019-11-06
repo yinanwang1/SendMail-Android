@@ -1,5 +1,8 @@
 package com.example.sendmail.uitl.mail;
 
+import com.sun.mail.util.MailSSLSocketFactory;
+
+import java.security.GeneralSecurityException;
 import java.util.Properties;
 
 public class Mail {
@@ -36,11 +39,22 @@ public class Mail {
             if (currentMailType == MailType.QQ) {
                 p.put("mail.smtp.starttls.enable", "true");// qq 需要，如果不加，会出现认证失败，163 不需要
 
-                p.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-                p.setProperty("mail.smtp.socketFactory.fallback", "false");
-                p.setProperty("mail.smtp.port", "465");
-                p.setProperty("mail.smtp.socketFactory.port", "465");
                 p.setProperty("mail.smtp.auth", "true");
+                p.setProperty("mail.smtp.host", this.mailServerHost);
+                p.setProperty("mail.smtp.port", this.mailServerPort);
+
+                //使用SSL，企业邮箱必需！
+                //开启安全协议
+                MailSSLSocketFactory sf = null;
+                try {
+                    sf = new MailSSLSocketFactory();
+                    sf.setTrustAllHosts(true);
+                } catch (GeneralSecurityException e1) {
+                    e1.printStackTrace();
+                }
+                p.put("mail.smtp.ssl.enable", "true");
+                p.put("mail.smtp.ssl.socketFactory", sf);
+
             }
         }
         return p;
